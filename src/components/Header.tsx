@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -28,22 +28,45 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    // Lock body scroll when mobile menu is open
+    const toggleMenu = useCallback(() => {
+        setMobileMenuOpen(prev => {
+            const next = !prev
+            if (next) {
+                document.body.classList.add('menu-open')
+            } else {
+                document.body.classList.remove('menu-open')
+            }
+            return next
+        })
+    }, [])
+
+    const closeMenu = useCallback(() => {
+        setMobileMenuOpen(false)
+        document.body.classList.remove('menu-open')
+    }, [])
+
+    // Close menu on route change
+    useEffect(() => {
+        closeMenu()
+    }, [pathname, closeMenu])
+
     return (
         <header
             className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
-                ? 'bg-black/90 backdrop-blur-xl border-b border-white/5 py-3'
-                : 'bg-transparent py-5'
+                ? 'bg-black/90 backdrop-blur-xl border-b border-white/5 py-2.5 md:py-3'
+                : 'bg-transparent py-3.5 md:py-5'
                 }`}
         >
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 group">
+                <Link href="/" className="flex items-center gap-2 group relative z-50">
                     <Image
                         src="/images/logo.png"
                         alt="The Clean Up Crew - Canada's Premium Cleaning Service"
                         width={200}
                         height={60}
-                        className="h-12 w-auto drop-shadow-[0_0_20px_rgba(0,212,255,0.3)] transition-all group-hover:drop-shadow-[0_0_30px_rgba(0,212,255,0.5)]"
+                        className="h-9 md:h-12 w-auto drop-shadow-[0_0_20px_rgba(0,212,255,0.3)] transition-all group-hover:drop-shadow-[0_0_30px_rgba(0,212,255,0.5)]"
                         priority
                     />
                 </Link>
@@ -92,45 +115,80 @@ export default function Header() {
 
                 {/* Mobile Toggle */}
                 <button
-                    className="lg:hidden text-white p-2"
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    className="lg:hidden text-white p-2.5 relative z-50 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    onClick={toggleMenu}
+                    aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 >
-                    {mobileMenuOpen ? <X /> : <Menu />}
+                    <AnimatePresence mode="wait">
+                        {mobileMenuOpen ? (
+                            <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                                <X className="w-6 h-6" />
+                            </motion.div>
+                        ) : (
+                            <motion.div key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                                <Menu className="w-6 h-6" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </button>
             </div>
 
-            {/* Mobile Menu */}
+            {/* Fullscreen Mobile Menu */}
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="absolute top-full left-0 w-full bg-black border-b border-white/5 shadow-2xl lg:hidden"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 top-0 bg-black/95 backdrop-blur-2xl z-40 lg:hidden flex flex-col"
                     >
-                        <div className="p-6 flex flex-col space-y-4">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={link.href}
-                                    className={`text-lg font-semibold uppercase tracking-wider ${pathname === link.href ? 'text-[#FFD700]' : 'text-white/70'}`}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
-                            <div className="pt-4 border-t border-white/10 flex flex-col gap-4">
-                                <a href="tel:440985298" className="flex items-center justify-center gap-2 text-white bg-white/5 py-3 rounded-xl">
-                                    <PhoneCall className="w-5 h-5 text-[#FFD700]" />
-                                    +440-98-5298
-                                </a>
-                                <Link href="/quote" onClick={() => setMobileMenuOpen(false)}>
-                                    <div className="w-full text-center bg-[#FFD700] text-black font-bold py-3 rounded-xl uppercase tracking-wider">
-                                        Get Free Quote
-                                    </div>
-                                </Link>
-                            </div>
+                        <div className="flex-1 flex flex-col justify-center items-center px-8 gap-2">
+                            {navLinks.map((link, i) => {
+                                const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/')
+                                return (
+                                    <motion.div
+                                        key={link.name}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: 10 }}
+                                        transition={{ delay: 0.1 + i * 0.06, duration: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
+                                    >
+                                        <Link
+                                            href={link.href}
+                                            className={`block text-center text-2xl font-bold uppercase tracking-widest py-3.5 transition-colors ${isActive ? 'text-[#FFD700]' : 'text-white/60 active:text-white'}`}
+                                            onClick={closeMenu}
+                                        >
+                                            {link.name}
+                                            {isActive && (
+                                                <motion.div
+                                                    layoutId="mobileActiveIndicator"
+                                                    className="w-8 h-0.5 bg-[#FFD700] mx-auto mt-1.5 rounded-full"
+                                                />
+                                            )}
+                                        </Link>
+                                    </motion.div>
+                                )
+                            })}
                         </div>
+
+                        {/* Bottom CTAs */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.45, duration: 0.4 }}
+                            className="px-6 pb-10 space-y-3"
+                        >
+                            <a href="tel:440985298" className="flex items-center justify-center gap-3 text-white bg-white/5 border border-white/10 py-4 rounded-2xl font-medium text-base">
+                                <PhoneCall className="w-5 h-5 text-[#FFD700]" />
+                                +440-98-5298
+                            </a>
+                            <Link href="/quote" onClick={closeMenu}>
+                                <div className="w-full text-center bg-[#FFD700] text-black font-bold py-4 rounded-2xl uppercase tracking-wider text-base mt-3">
+                                    Get Free Quote
+                                </div>
+                            </Link>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>

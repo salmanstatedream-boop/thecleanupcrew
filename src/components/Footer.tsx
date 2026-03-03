@@ -13,20 +13,20 @@ export default function Footer() {
 
             {/* Giant brand watermark */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0">
-                <h2 className="font-heading text-[8rem] md:text-[14rem] lg:text-[18rem] font-bold text-white/[0.02] whitespace-nowrap leading-none tracking-tighter">
+                <h2 className="font-heading text-[5rem] md:text-[14rem] lg:text-[18rem] font-bold text-white/[0.02] whitespace-nowrap leading-none tracking-tighter">
                     CLEAN UP
                 </h2>
             </div>
 
-            <div className="container mx-auto px-4 md:px-6 pt-16 pb-8 relative z-10">
+            <div className="container mx-auto px-5 md:px-6 pt-12 md:pt-16 pb-6 md:pb-8 relative z-10">
 
                 {/* Main grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12 mb-10 md:mb-16">
 
                     {/* Brand Col */}
-                    <div className="space-y-6">
+                    <div className="space-y-5 md:space-y-6 col-span-2 md:col-span-1">
                         <Link href="/" className="inline-block">
-                            <span className="font-heading text-2xl font-bold text-white">
+                            <span className="font-heading text-xl md:text-2xl font-bold text-white">
                                 The Clean Up <span className="text-[#FFD700]">Crew</span>
                             </span>
                         </Link>
@@ -45,26 +45,26 @@ export default function Footer() {
 
                     {/* Services Col */}
                     <div>
-                        <h4 className="font-heading font-bold text-white mb-6 uppercase tracking-widest text-sm">Services</h4>
-                        <ul className="space-y-3 text-sm text-white/30">
-                            <li><Link href="/services" className="hover:text-[#FFD700] transition-colors flex items-center gap-2"><Droplets className="w-3 h-3" /> Window Cleaning</Link></li>
-                            <li><Link href="/services" className="hover:text-[#FFD700] transition-colors flex items-center gap-2"><Droplets className="w-3 h-3" /> Commercial Cleaning</Link></li>
-                            <li><Link href="/services" className="hover:text-[#FFD700] transition-colors flex items-center gap-2"><Droplets className="w-3 h-3" /> Eavestrough Cleaning</Link></li>
-                            <li><Link href="/services" className="hover:text-[#FFD700] transition-colors flex items-center gap-2"><Droplets className="w-3 h-3" /> Carpet Cleaning</Link></li>
+                        <h4 className="font-heading font-bold text-white mb-4 md:mb-6 uppercase tracking-widest text-xs md:text-sm">Services</h4>
+                        <ul className="space-y-2.5 md:space-y-3 text-sm text-white/30">
+                            <li><Link href="/services" className="hover:text-[#FFD700] transition-colors flex items-center gap-2"><Droplets className="w-3 h-3 shrink-0" /> Window Cleaning</Link></li>
+                            <li><Link href="/services" className="hover:text-[#FFD700] transition-colors flex items-center gap-2"><Droplets className="w-3 h-3 shrink-0" /> Commercial Cleaning</Link></li>
+                            <li><Link href="/services" className="hover:text-[#FFD700] transition-colors flex items-center gap-2"><Droplets className="w-3 h-3 shrink-0" /> Eavestrough Cleaning</Link></li>
+                            <li><Link href="/services" className="hover:text-[#FFD700] transition-colors flex items-center gap-2"><Droplets className="w-3 h-3 shrink-0" /> Carpet Cleaning</Link></li>
                         </ul>
                     </div>
 
                     {/* Contact Col */}
                     <div>
-                        <h4 className="font-heading font-bold text-white mb-6 uppercase tracking-widest text-sm">Get In Touch</h4>
-                        <div className="space-y-4">
+                        <h4 className="font-heading font-bold text-white mb-4 md:mb-6 uppercase tracking-widest text-xs md:text-sm">Get In Touch</h4>
+                        <div className="space-y-3 md:space-y-4">
                             <a href="tel:440985298" className="flex items-center gap-3 text-sm text-white/30 hover:text-[#FFD700] transition-colors">
                                 <Phone className="w-4 h-4 text-[#FFD700] shrink-0" />
                                 +440-98-5298
                             </a>
                             <a href="mailto:info@thecleanupcrew.ca" className="flex items-center gap-3 text-sm text-white/30 hover:text-[#FFD700] transition-colors">
                                 <Mail className="w-4 h-4 text-[#FFD700] shrink-0" />
-                                info@thecleanupcrew.ca
+                                <span className="break-all">info@thecleanupcrew.ca</span>
                             </a>
                             <div className="flex items-start gap-3 text-sm text-white/30">
                                 <MapPin className="w-4 h-4 text-[#FFD700] shrink-0 mt-0.5" />
@@ -75,17 +75,17 @@ export default function Footer() {
 
                     {/* Trust Col */}
                     <div>
-                        <h4 className="font-heading font-bold text-white mb-6 uppercase tracking-widest text-sm">Why Us</h4>
-                        <div className="space-y-3">
-                            <div className="flex items-center gap-3 text-sm text-white/30 bg-white/[0.02] p-3 rounded-lg border border-white/5">
+                        <h4 className="font-heading font-bold text-white mb-4 md:mb-6 uppercase tracking-widest text-xs md:text-sm">Why Us</h4>
+                        <div className="space-y-2.5 md:space-y-3">
+                            <div className="flex items-center gap-3 text-sm text-white/30 bg-white/[0.02] p-2.5 md:p-3 rounded-lg border border-white/5">
                                 <ShieldCheck className="w-5 h-5 text-[#22C55E] shrink-0" />
                                 <span>Fully Insured & WSIB</span>
                             </div>
-                            <div className="flex items-center gap-3 text-sm text-white/30 bg-white/[0.02] p-3 rounded-lg border border-white/5">
+                            <div className="flex items-center gap-3 text-sm text-white/30 bg-white/[0.02] p-2.5 md:p-3 rounded-lg border border-white/5">
                                 <Award className="w-5 h-5 text-[#FFD700] shrink-0" />
                                 <span>Top Rated on Google</span>
                             </div>
-                            <div className="flex items-center gap-3 text-sm text-white/30 bg-white/[0.02] p-3 rounded-lg border border-white/5">
+                            <div className="flex items-center gap-3 text-sm text-white/30 bg-white/[0.02] p-2.5 md:p-3 rounded-lg border border-white/5">
                                 <Leaf className="w-5 h-5 text-[#22C55E] shrink-0" />
                                 <span>100% Eco-Friendly</span>
                             </div>
@@ -95,15 +95,15 @@ export default function Footer() {
                 </div>
 
                 {/* Service areas */}
-                <div className="border-t border-white/5 pt-8 mb-8">
-                    <p className="text-center text-white/20 text-xs uppercase tracking-widest mb-4">Proudly Serving</p>
-                    <p className="text-center text-white/30 text-sm">
+                <div className="border-t border-white/5 pt-6 md:pt-8 mb-6 md:mb-8">
+                    <p className="text-center text-white/20 text-xs uppercase tracking-widest mb-3 md:mb-4">Proudly Serving</p>
+                    <p className="text-center text-white/30 text-xs md:text-sm leading-relaxed">
                         Toronto · Mississauga · Brampton · Vaughan · Markham · Oakville · Hamilton · London · Ottawa · Vancouver
                     </p>
                 </div>
 
                 {/* Bottom bar */}
-                <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/20">
+                <div className="border-t border-white/5 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4 text-xs text-white/20">
                     <p>&copy; {currentYear} The Clean Up Crew. All rights reserved.</p>
                     <div className="flex gap-6">
                         <Link href="/contact" className="hover:text-white transition-colors">Privacy Policy</Link>

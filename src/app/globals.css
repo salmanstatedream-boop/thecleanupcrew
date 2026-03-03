@@ -31,7 +31,14 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 72px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 80px;
+  }
 }
 
 body {
@@ -39,6 +46,15 @@ body {
   color: #ffffff;
   font-family: var(--font-sans);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Lock body scroll when mobile menu is open */
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 /* Premium glow utilities */
@@ -57,6 +73,17 @@ body {
 
   .glow-gold {
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.15), 0 0 60px rgba(255, 215, 0, 0.05);
+  }
+}
+
+/* Touch-friendly active states */
+@media (hover: none) {
+
+  button:active,
+  a:active {
+    opacity: 0.85;
+    transform: scale(0.98);
+    transition: all 0.1s ease;
   }
 }
 
@@ -144,4 +171,28 @@ body {
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+/* Custom range slider styling for mobile */
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FFD700;
+  cursor: pointer;
+  border: 2px solid #000;
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid #FFD700;
+  outline-offset: 2px;
 }

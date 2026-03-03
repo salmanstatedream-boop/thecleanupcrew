@@ -56,19 +56,19 @@ export default function QuotePage() {
     }
 
     return (
-        <div className="min-h-[calc(100vh)] bg-black py-32 relative overflow-hidden flex flex-col items-center">
+        <div className="min-h-[calc(100vh)] bg-black py-24 md:py-32 relative overflow-hidden flex flex-col items-center">
             {/* Background glow elements */}
             <div className="absolute top-1/4 left-0 w-96 h-96 bg-[#FFD700]/10 rounded-full blur-[120px] pointer-events-none"></div>
             <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#FFC107]/10 rounded-full blur-[150px] pointer-events-none"></div>
 
-            <div className="container mx-auto px-4 max-w-3xl relative z-10 w-full">
-                <div className="mb-12 text-center">
-                    <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">Your Instant Estimate</h1>
-                    <p className="text-white/40">Answer a few simple questions to get your crystal clear price.</p>
+            <div className="container mx-auto px-5 md:px-4 max-w-3xl relative z-10 w-full">
+                <div className="mb-8 md:mb-12 text-center">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-3 md:mb-4">Your Instant Estimate</h1>
+                    <p className="text-white/40 text-sm md:text-base">Answer a few simple questions to get your crystal clear price.</p>
                 </div>
 
                 {/* Progress Bar */}
-                <div className="mb-12 relative w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                <div className="mb-8 md:mb-12 relative w-full h-2 bg-white/10 rounded-full overflow-hidden">
                     <motion.div
                         className="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-[#FFD700] to-[#FFC107]"
                         initial={{ width: '25%' }}
@@ -77,7 +77,7 @@ export default function QuotePage() {
                     />
                 </div>
 
-                <div className="bg-[#111111]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12 shadow-2xl relative">
+                <div className="bg-[#111111]/80 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-5 md:p-12 shadow-2xl relative">
                     <AnimatePresence mode="wait">
                         {/* STEP 1: PROPERTY TYPE */}
                         {step === 1 && (
@@ -86,24 +86,24 @@ export default function QuotePage() {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
-                                className="flex flex-col gap-6"
+                                className="flex flex-col gap-5 md:gap-6"
                             >
-                                <h2 className="text-2xl font-heading font-bold text-white text-center mb-6">What type of property?</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <h2 className="text-xl md:text-2xl font-heading font-bold text-white text-center mb-2 md:mb-6">What type of property?</h2>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <button
                                         onClick={() => { setPropertyType('residential'); handleNext() }}
-                                        className={`flex flex-col items-center justify-center p-8 rounded-2xl border-2 transition-all group ${propertyType === 'residential' ? 'border-[#FFD700] bg-[#FFD700]/10' : 'border-white/10 hover:border-white/30 bg-white/5'}`}
+                                        className={`flex flex-col items-center justify-center p-6 md:p-8 rounded-2xl border-2 transition-all group ${propertyType === 'residential' ? 'border-[#FFD700] bg-[#FFD700]/10' : 'border-white/10 hover:border-white/30 bg-white/5'}`}
                                     >
-                                        <Home className={`w-12 h-12 mb-4 transition-colors ${propertyType === 'residential' ? 'text-[#FFD700]' : 'text-white/40 group-hover:text-white'}`} />
-                                        <span className={`text-lg font-bold transition-colors ${propertyType === 'residential' ? 'text-white' : 'text-white/40 group-hover:text-white'}`}>Residential Home</span>
+                                        <Home className={`w-10 h-10 md:w-12 md:h-12 mb-3 md:mb-4 transition-colors ${propertyType === 'residential' ? 'text-[#FFD700]' : 'text-white/40 group-hover:text-white'}`} />
+                                        <span className={`text-base md:text-lg font-bold transition-colors ${propertyType === 'residential' ? 'text-white' : 'text-white/40 group-hover:text-white'}`}>Residential Home</span>
                                     </button>
 
                                     <button
                                         onClick={() => { setPropertyType('commercial'); handleNext() }}
-                                        className={`flex flex-col items-center justify-center p-8 rounded-2xl border-2 transition-all group ${propertyType === 'commercial' ? 'border-[#FFD700] bg-[#FFD700]/10' : 'border-white/10 hover:border-white/30 bg-white/5'}`}
+                                        className={`flex flex-col items-center justify-center p-6 md:p-8 rounded-2xl border-2 transition-all group ${propertyType === 'commercial' ? 'border-[#FFD700] bg-[#FFD700]/10' : 'border-white/10 hover:border-white/30 bg-white/5'}`}
                                     >
-                                        <Building2 className={`w-12 h-12 mb-4 transition-colors ${propertyType === 'commercial' ? 'text-[#FFD700]' : 'text-white/40 group-hover:text-white'}`} />
-                                        <span className={`text-lg font-bold transition-colors ${propertyType === 'commercial' ? 'text-white' : 'text-white/40 group-hover:text-white'}`}>Commercial/Office</span>
+                                        <Building2 className={`w-10 h-10 md:w-12 md:h-12 mb-3 md:mb-4 transition-colors ${propertyType === 'commercial' ? 'text-[#FFD700]' : 'text-white/40 group-hover:text-white'}`} />
+                                        <span className={`text-base md:text-lg font-bold transition-colors ${propertyType === 'commercial' ? 'text-white' : 'text-white/40 group-hover:text-white'}`}>Commercial/Office</span>
                                     </button>
                                 </div>
                             </motion.div>
@@ -117,13 +117,13 @@ export default function QuotePage() {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
                             >
-                                <h2 className="text-2xl font-heading font-bold text-white text-center mb-8">Property Details</h2>
+                                <h2 className="text-xl md:text-2xl font-heading font-bold text-white text-center mb-6 md:mb-8">Property Details</h2>
 
-                                <div className="space-y-8">
+                                <div className="space-y-6 md:space-y-8">
                                     <div>
-                                        <div className="flex justify-between text-white mb-4">
-                                            <label className="font-medium">Number of Windows (approx)</label>
-                                            <span className="font-accent text-[#FFD700] text-xl font-bold">{details.windows}</span>
+                                        <div className="flex justify-between text-white mb-3 md:mb-4">
+                                            <label className="font-medium text-sm md:text-base">Number of Windows (approx)</label>
+                                            <span className="font-accent text-[#FFD700] text-lg md:text-xl font-bold">{details.windows}</span>
                                         </div>
                                         <input
                                             type="range"
@@ -135,9 +135,9 @@ export default function QuotePage() {
                                     </div>
 
                                     <div>
-                                        <div className="flex justify-between text-white mb-4">
-                                            <label className="font-medium">Highest Floor to Clean</label>
-                                            <span className="font-accent text-[#FFD700] text-xl font-bold">{details.floors}</span>
+                                        <div className="flex justify-between text-white mb-3 md:mb-4">
+                                            <label className="font-medium text-sm md:text-base">Highest Floor to Clean</label>
+                                            <span className="font-accent text-[#FFD700] text-lg md:text-xl font-bold">{details.floors}</span>
                                         </div>
                                         <input
                                             type="range"
@@ -150,31 +150,31 @@ export default function QuotePage() {
                                     </div>
 
                                     <div>
-                                        <label className="font-medium text-white mb-4 block">Recommended Add-Ons</label>
+                                        <label className="font-medium text-white mb-3 md:mb-4 block text-sm md:text-base">Recommended Add-Ons</label>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                             <div
                                                 onClick={() => toggleAddOn('screens')}
-                                                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-colors ${details.addOns.includes('screens') ? 'bg-[#FFD700]/10 border-[#FFD700] text-white' : 'bg-white/5 border-white/10 text-white/40 hover:border-white/30'}`}
+                                                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-colors min-h-[52px] ${details.addOns.includes('screens') ? 'bg-[#FFD700]/10 border-[#FFD700] text-white' : 'bg-white/5 border-white/10 text-white/40 hover:border-white/30'}`}
                                             >
-                                                <span>Screen Cleaning</span>
+                                                <span className="text-sm md:text-base">Screen Cleaning</span>
                                                 {details.addOns.includes('screens') && <Check className="w-5 h-5 text-[#FFD700]" />}
                                             </div>
                                             <div
                                                 onClick={() => toggleAddOn('tracks')}
-                                                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-colors ${details.addOns.includes('tracks') ? 'bg-[#FFD700]/10 border-[#FFD700] text-white' : 'bg-white/5 border-white/10 text-white/40 hover:border-white/30'}`}
+                                                className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-colors min-h-[52px] ${details.addOns.includes('tracks') ? 'bg-[#FFD700]/10 border-[#FFD700] text-white' : 'bg-white/5 border-white/10 text-white/40 hover:border-white/30'}`}
                                             >
-                                                <span>Deep Track Cleaning</span>
+                                                <span className="text-sm md:text-base">Deep Track Cleaning</span>
                                                 {details.addOns.includes('tracks') && <Check className="w-5 h-5 text-[#FFD700]" />}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="flex justify-between mt-12">
-                                    <button onClick={handleBack} className="flex items-center gap-2 text-white/40 hover:text-white transition-colors">
+                                <div className="flex flex-col-reverse sm:flex-row justify-between mt-8 md:mt-12 gap-3">
+                                    <button onClick={handleBack} className="flex items-center justify-center gap-2 text-white/40 hover:text-white transition-colors py-3 sm:py-0">
                                         <ArrowLeft className="w-4 h-4" /> Back
                                     </button>
-                                    <button onClick={handleNext} className="flex items-center gap-2 bg-white text-[#0A1628] px-6 py-2.5 rounded-full font-bold hover:bg-[#FFD700] transition-colors">
+                                    <button onClick={handleNext} className="flex items-center justify-center gap-2 bg-white text-[#0A1628] px-6 py-3 rounded-full font-bold hover:bg-[#FFD700] transition-colors w-full sm:w-auto">
                                         Continue <ArrowRight className="w-4 h-4" />
                                     </button>
                                 </div>
@@ -189,8 +189,8 @@ export default function QuotePage() {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
                             >
-                                <h2 className="text-2xl font-heading font-bold text-white text-center mb-2">Where to send the estimate?</h2>
-                                <p className="text-white/40 text-center text-sm mb-8">We won't spam you. Promise.</p>
+                                <h2 className="text-xl md:text-2xl font-heading font-bold text-white text-center mb-1 md:mb-2">Where to send the estimate?</h2>
+                                <p className="text-white/40 text-center text-sm mb-6 md:mb-8">We won&apos;t spam you. Promise.</p>
 
                                 <form onSubmit={submitQuote} className="space-y-4">
                                     <div>
@@ -198,7 +198,7 @@ export default function QuotePage() {
                                         <input
                                             required type="text"
                                             value={contact.name} onChange={e => setContact({ ...contact, name: e.target.value })}
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#FFD700] transition-colors"
+                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 md:py-3 text-white text-base focus:outline-none focus:border-[#FFD700] transition-colors"
                                             placeholder="Jane Doe"
                                         />
                                     </div>
@@ -208,7 +208,7 @@ export default function QuotePage() {
                                             <input
                                                 required type="email"
                                                 value={contact.email} onChange={e => setContact({ ...contact, email: e.target.value })}
-                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#FFD700] transition-colors"
+                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 md:py-3 text-white text-base focus:outline-none focus:border-[#FFD700] transition-colors"
                                                 placeholder="jane@example.com"
                                             />
                                         </div>
@@ -217,20 +217,20 @@ export default function QuotePage() {
                                             <input
                                                 required type="tel"
                                                 value={contact.phone} onChange={e => setContact({ ...contact, phone: e.target.value })}
-                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#FFD700] transition-colors"
+                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 md:py-3 text-white text-base focus:outline-none focus:border-[#FFD700] transition-colors"
                                                 placeholder="(555) 123-4567"
                                             />
                                         </div>
                                     </div>
 
-                                    <div className="flex justify-between mt-12 items-center">
-                                        <button type="button" onClick={handleBack} className="flex items-center gap-2 text-white/40 hover:text-white transition-colors">
+                                    <div className="flex flex-col-reverse sm:flex-row justify-between mt-8 md:mt-12 items-center gap-3">
+                                        <button type="button" onClick={handleBack} className="flex items-center justify-center gap-2 text-white/40 hover:text-white transition-colors py-3 sm:py-0 w-full sm:w-auto">
                                             <ArrowLeft className="w-4 h-4" /> Back
                                         </button>
                                         <button
                                             type="submit"
                                             disabled={isCalculating}
-                                            className="flex items-center gap-2 bg-[#FFD700] hover:bg-[#FFC107] text-[#0A1628] px-8 py-3 rounded-full font-bold transition-colors disabled:opacity-50 min-w-[200px] justify-center shadow-[0_0_15px_rgba(0,212,255,0.3)]"
+                                            className="flex items-center gap-2 bg-[#FFD700] hover:bg-[#FFC107] text-[#0A1628] px-8 py-3.5 rounded-full font-bold transition-colors disabled:opacity-50 w-full sm:w-auto sm:min-w-[200px] justify-center shadow-[0_0_15px_rgba(0,212,255,0.3)]"
                                         >
                                             {isCalculating ? (
                                                 <div className="w-5 h-5 border-2 border-[#0A1628] border-t-transparent rounded-full animate-spin"></div>
@@ -249,26 +249,26 @@ export default function QuotePage() {
                                 key="step4"
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                className="text-center py-8"
+                                className="text-center py-4 md:py-8"
                             >
-                                <div className="w-20 h-20 bg-[#22C55E]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <Check className="w-10 h-10 text-[#22C55E]" />
+                                <div className="w-16 h-16 md:w-20 md:h-20 bg-[#22C55E]/10 rounded-full flex items-center justify-center mx-auto mb-5 md:mb-6">
+                                    <Check className="w-8 h-8 md:w-10 md:h-10 text-[#22C55E]" />
                                 </div>
-                                <h2 className="text-3xl font-heading font-bold text-white mb-2">Estimate Ready</h2>
-                                <p className="text-white/40 mb-8">A copy has been sent to {contact.email}</p>
+                                <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2">Estimate Ready</h2>
+                                <p className="text-white/40 text-sm md:text-base mb-6 md:mb-8">A copy has been sent to {contact.email}</p>
 
-                                <div className="bg-black border border-white/10 rounded-2xl p-8 mb-8 inline-block min-w-[300px]">
+                                <div className="bg-black border border-white/10 rounded-2xl p-6 md:p-8 mb-6 md:mb-8 inline-block w-full sm:w-auto sm:min-w-[300px]">
                                     <p className="text-sm text-white/40 uppercase tracking-wider mb-2">Estimated Total</p>
                                     <div className="flex items-start justify-center text-white">
-                                        <span className="text-2xl font-bold mt-1 mr-1">$</span>
-                                        <span className="text-6xl font-accent font-bold tracking-tighter">{quoteResult.estimate.toFixed(2)}</span>
-                                        <span className="text-xl font-medium mt-6 ml-2 text-white/40">{quoteResult.currency}</span>
+                                        <span className="text-xl md:text-2xl font-bold mt-1 mr-1">$</span>
+                                        <span className="text-4xl md:text-6xl font-accent font-bold tracking-tighter">{quoteResult.estimate.toFixed(2)}</span>
+                                        <span className="text-base md:text-xl font-medium mt-3 md:mt-6 ml-2 text-white/40">{quoteResult.currency}</span>
                                     </div>
-                                    <p className="text-xs text-white/40 mt-4">*Final price confirmed upon on-site inspection.</p>
+                                    <p className="text-xs text-white/40 mt-3 md:mt-4">*Final price confirmed upon on-site inspection.</p>
                                 </div>
 
-                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <Link href="/contact" className="bg-[#FFD700] hover:bg-white text-black px-8 py-3 rounded-full font-bold transition-colors shadow-[0_0_15px_rgba(255,215,0,0.3)]">
+                                <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+                                    <Link href="/contact" className="bg-[#FFD700] hover:bg-white text-black px-8 py-3.5 rounded-full font-bold transition-colors shadow-[0_0_15px_rgba(255,215,0,0.3)] text-center">
                                         Book An Appointment
                                     </Link>
                                     <button onClick={() => setStep(1)} className="text-white/40 hover:text-white font-medium px-8 py-3 transition-colors">
