@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createServerClient } from "@/lib/supabase/server";
 
 export async function POST(request: Request) {
     try {
@@ -22,26 +23,20 @@ export async function POST(request: Request) {
             );
         }
 
-        // TODO: When Supabase is configured, uncomment this:
-        // import { createClient } from '@supabase/supabase-js';
-        // const supabase = createClient(
-        //   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        //   process.env.SUPABASE_SERVICE_ROLE_KEY!
-        // );
-        // const { error } = await supabase.from('contact_submissions').insert({
-        //   name, email, phone, subject, message,
-        // });
-        // if (error) throw error;
-
-        // For now, just log and return success
-        console.log("Contact form submission:", {
-            name,
+        // Insert into Supabase
+        const supabase = createServerClient();
+        const { error } = await supabase.from("contact_submissions").insert({
+            first_name: name,
             email,
             phone,
-            subject,
+            service_interest: subject,
             message,
-            timestamp: new Date().toISOString(),
         });
+
+        if (error) {
+            console.error("Supabase insert error:", error);
+            throw error;
+        }
 
         return NextResponse.json(
             { success: true, message: "Form submitted successfully" },
