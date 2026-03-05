@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function HeroScene() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
-    const scrollRef = useRef(0)
     const [reducedMotion, setReducedMotion] = useState(false)
 
     useEffect(() => {
@@ -47,15 +46,15 @@ export default function HeroScene() {
 
         const createParticles = () => {
             particles.length = 0
-            const count = Math.min(90, Math.max(45, Math.floor(width / 24)))
+            const count = Math.min(120, Math.max(60, Math.floor(width / 20)))
             for (let i = 0; i < count; i += 1) {
                 particles.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.18,
-                    vy: (Math.random() - 0.5) * 0.18,
-                    radius: Math.random() * 2.2 + 0.5,
-                    alpha: Math.random() * 0.35 + 0.08,
+                    vx: (Math.random() - 0.5) * 0.12,
+                    vy: (Math.random() - 0.5) * 0.12,
+                    radius: Math.random() * 1.5 + 0.3,
+                    alpha: Math.random() * 0.25 + 0.05,
                 })
             }
         }
@@ -86,79 +85,52 @@ export default function HeroScene() {
             }
         }
 
-        const onScroll = () => {
-            scrollRef.current = window.scrollY
-        }
-
         resize()
         window.addEventListener('resize', resize)
         window.addEventListener('mousemove', onPointerMove, { passive: true })
         window.addEventListener('touchmove', onTouchMove, { passive: true })
-        window.addEventListener('scroll', onScroll, { passive: true })
 
         let time = 0
 
-        const drawAurora = (t: number) => {
-            const bandA = ctx.createLinearGradient(0, 0, width, height)
-            bandA.addColorStop(0, 'rgba(255, 215, 0, 0.12)')
-            bandA.addColorStop(0.5, 'rgba(173, 255, 219, 0.1)')
-            bandA.addColorStop(1, 'rgba(255, 255, 255, 0)')
-
-            const waveY = Math.sin(t * 0.65) * 60
-            ctx.save()
-            ctx.translate(0, waveY)
-            ctx.fillStyle = bandA
-            ctx.beginPath()
-            ctx.moveTo(-60, height * 0.18)
-            ctx.bezierCurveTo(width * 0.2, height * 0.05, width * 0.5, height * 0.35, width + 60, height * 0.14)
-            ctx.lineTo(width + 60, height * 0.45)
-            ctx.bezierCurveTo(width * 0.55, height * 0.58, width * 0.25, height * 0.25, -60, height * 0.5)
-            ctx.closePath()
-            ctx.fill()
-            ctx.restore()
-
-            const bandB = ctx.createLinearGradient(width, 0, 0, height)
-            bandB.addColorStop(0, 'rgba(255, 204, 0, 0.11)')
-            bandB.addColorStop(0.6, 'rgba(0, 212, 255, 0.08)')
-            bandB.addColorStop(1, 'rgba(255, 255, 255, 0)')
-
-            const drift = Math.cos(t * 0.45) * 45
-            ctx.save()
-            ctx.translate(0, drift)
-            ctx.fillStyle = bandB
-            ctx.beginPath()
-            ctx.moveTo(-80, height * 0.52)
-            ctx.bezierCurveTo(width * 0.28, height * 0.35, width * 0.62, height * 0.72, width + 80, height * 0.5)
-            ctx.lineTo(width + 80, height * 0.82)
-            ctx.bezierCurveTo(width * 0.7, height * 0.93, width * 0.3, height * 0.55, -80, height * 0.88)
-            ctx.closePath()
-            ctx.fill()
-            ctx.restore()
-        }
-
         const animate = () => {
-            time += 0.008
-            const scrollShift = Math.min(scrollRef.current * 0.2, 180)
+            time += 0.005
 
             ctx.clearRect(0, 0, width, height)
-            ctx.fillStyle = '#F8F6F0'
+            ctx.fillStyle = '#050505'
             ctx.fillRect(0, 0, width, height)
 
-            drawAurora(time)
+            ctx.globalCompositeOperation = 'screen'
 
-            const spotlight = ctx.createRadialGradient(
-                width * 0.5 + (pointerX - width * 0.5) * 0.05,
-                height * 0.45 + (pointerY - height * 0.45) * 0.05 - scrollShift,
-                0,
-                width * 0.5,
-                height * 0.45,
-                Math.max(width, height) * 0.7
-            )
-            spotlight.addColorStop(0, 'rgba(255, 255, 255, 0.45)')
-            spotlight.addColorStop(1, 'rgba(248, 246, 240, 0)')
-            ctx.fillStyle = spotlight
+            // Golden Glow
+            const x1 = width * 0.5 + Math.sin(time * 0.5) * width * 0.3 + (pointerX - width * 0.5) * 0.1
+            const y1 = height * 0.5 + Math.cos(time * 0.3) * height * 0.3 + (pointerY - height * 0.5) * 0.1
+            const g1 = ctx.createRadialGradient(x1, y1, 0, x1, y1, Math.max(width, height) * 0.6)
+            g1.addColorStop(0, 'rgba(255, 180, 0, 0.2)')
+            g1.addColorStop(1, 'rgba(255, 180, 0, 0)')
+            ctx.fillStyle = g1
             ctx.fillRect(0, 0, width, height)
 
+            // Deep Azure/Cyan Glow
+            const x2 = width * 0.5 + Math.cos(time * 0.4) * width * 0.25 - (pointerX - width * 0.5) * 0.08
+            const y2 = height * 0.5 + Math.sin(time * 0.6) * height * 0.25 - (pointerY - height * 0.5) * 0.08
+            const g2 = ctx.createRadialGradient(x2, y2, 0, x2, y2, Math.max(width, height) * 0.7)
+            g2.addColorStop(0, 'rgba(0, 220, 255, 0.15)')
+            g2.addColorStop(1, 'rgba(0, 220, 255, 0)')
+            ctx.fillStyle = g2
+            ctx.fillRect(0, 0, width, height)
+
+            // Indigo Mesh Glow
+            const x3 = width * 0.5 + Math.sin(time * 0.2) * width * 0.4
+            const y3 = height * 0.5 + Math.cos(time * 0.7) * height * 0.4
+            const g3 = ctx.createRadialGradient(x3, y3, 0, x3, y3, Math.max(width, height) * 0.8)
+            g3.addColorStop(0, 'rgba(60, 0, 255, 0.1)')
+            g3.addColorStop(1, 'rgba(60, 0, 255, 0)')
+            ctx.fillStyle = g3
+            ctx.fillRect(0, 0, width, height)
+
+            ctx.globalCompositeOperation = 'lighter'
+
+            // Smooth interactive particles
             for (let i = 0; i < particles.length; i += 1) {
                 const p = particles[i]
                 p.x += p.vx
@@ -169,17 +141,22 @@ export default function HeroScene() {
                 if (p.y < -20) p.y = height + 20
                 if (p.y > height + 20) p.y = -20
 
-                const py = p.y - scrollShift * 0.35
                 const dx = pointerX - p.x
-                const dy = pointerY - py
+                const dy = pointerY - p.y
                 const dist = Math.hypot(dx, dy)
-                const glowBoost = dist < 180 ? (1 - dist / 180) * 0.4 : 0
+                const proximity = dist < 250 ? (1 - dist / 250) * 0.6 : 0
+
+                const color = i % 2 === 0
+                    ? `rgba(255, 215, 0, ${p.alpha + proximity})` // Gold
+                    : `rgba(0, 206, 255, ${p.alpha + proximity})` // Azure
 
                 ctx.beginPath()
-                ctx.arc(p.x, py, p.radius + glowBoost, 0, Math.PI * 2)
-                ctx.fillStyle = `rgba(255, 199, 0, ${p.alpha + glowBoost * 0.4})`
+                ctx.arc(p.x, p.y, p.radius + proximity * 2, 0, Math.PI * 2)
+                ctx.fillStyle = color
                 ctx.fill()
             }
+
+            ctx.globalCompositeOperation = 'source-over'
 
             animationId = requestAnimationFrame(animate)
         }
@@ -191,14 +168,14 @@ export default function HeroScene() {
             window.removeEventListener('resize', resize)
             window.removeEventListener('mousemove', onPointerMove)
             window.removeEventListener('touchmove', onTouchMove)
-            window.removeEventListener('scroll', onScroll)
         }
     }, [reducedMotion])
 
     return (
-        <div className="absolute inset-0 h-full w-full bg-[#F8F6F0]">
+        <div className="absolute inset-0 h-full w-full bg-[#050505] -z-10">
             {!reducedMotion && <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,215,0,0.12),transparent_55%)]" />
+            {/* Super premium subtle noise/texture overlay for the background */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#050505_120%)] pointer-events-none" />
         </div>
     )
 }

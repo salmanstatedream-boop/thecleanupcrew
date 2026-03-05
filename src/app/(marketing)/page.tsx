@@ -1,32 +1,24 @@
 'use client'
 
+import HeroScene from '@/components/spline/HeroScene'
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll'
 import { ParallaxLayer } from '@/components/ui/ParallaxLayer'
 import { ArrowRight, Droplets, Building2, Waves, Sparkles, Star, Shield, Leaf, Clock, CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function Home() {
   return (
     <>
       {/* ═══════════════════════════════════════════════════════ */}
-      {/* HERO — Photorealistic Background + Dark Overlay */}
+      {/* HERO — High-End Spline-Style Fluid Mesh */}
       {/* ═══════════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen w-full overflow-hidden bg-black">
-        {/* Background Image */}
+      <section className="relative min-h-screen w-full overflow-hidden bg-[#050505]">
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/hero-bg.webp"
-            alt="Professional exterior cleaning"
-            fill
-            priority
-            className="object-cover object-center"
-            quality={100}
-          />
-          {/* Dark Contrast Overlay for readability */}
-          <div className="absolute inset-0 bg-black/50 sm:bg-black/60 z-10" />
+          <HeroScene />
+          {/* Subtle noise/vignette overlay for text contract */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-transparent to-[#050505] z-10 pointer-events-none" />
           {/* Gradient to smooth out the bottom transition into the next section */}
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#F8F6F0] to-transparent z-10" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#F8F6F0] via-[#F8F6F0]/80 to-transparent z-10" />
         </div>
 
         <div className="relative z-20 container mx-auto px-5 md:px-4 min-h-screen flex flex-col justify-center items-center text-center pt-24 pb-16">
