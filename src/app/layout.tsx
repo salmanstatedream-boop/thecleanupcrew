@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -24,9 +22,9 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "The Clean Up Crew | Canada's #1 Premium Window & Exterior Cleaning",
+  title: "The Cleanup Crew | Canada's #1 Premium Window & Exterior Cleaning",
   description:
-    "Canada's top-rated professional window cleaning, eavestrough cleaning, and commercial exterior maintenance. WSIB compliant, fully insured, eco-friendly. Serving the Greater Toronto Area and beyond. Get your free instant quote today.",
+    "Canada's top-rated professional window cleaning, eavestrough cleaning, and commercial exterior maintenance. WSIB compliant, fully insured, eco-friendly. Serving the Greater Toronto Area and beyond.",
   keywords: [
     "window cleaning Canada",
     "window cleaning Toronto",
@@ -38,18 +36,12 @@ export const metadata: Metadata = {
     "carpet cleaning Canada",
   ],
   openGraph: {
-    title: "The Clean Up Crew | Canada's #1 Premium Window & Exterior Cleaning",
+    title: "The Cleanup Crew | Canada's #1 Premium Window & Exterior Cleaning",
     description:
       "Trusted by 15,000+ Canadian homeowners. Professional window cleaning with eco-friendly pure-water technology.",
     url: "https://thecleanupcrew.ca",
-    siteName: "The Clean Up Crew",
+    siteName: "The Cleanup Crew",
     type: "website",
-  },
-  alternates: {
-    canonical: "https://thecleanupcrew.ca",
-    languages: {
-      'en-CA': 'https://thecleanupcrew.ca',
-    },
   },
 };
 
@@ -62,12 +54,9 @@ export default function RootLayout({
     <html lang="en" className="dark scroll-smooth">
       <body className={`${jakarta.variable} ${inter.variable} ${playfair.variable} font-sans bg-black text-white antialiased min-h-screen flex flex-col`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+          {children}
         </ThemeProvider>
       </body>
     </html>
   );
 }
-

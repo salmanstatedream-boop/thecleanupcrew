@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
-import { createServerClient } from "@/lib/supabase/server";
+import { createSupabaseAdminClient } from "@/lib/supabase/server";
 
 export async function POST(request: Request) {
     try {
         const body = await request.json();
         const { name, email, phone, subject, message } = body;
 
-        // Validate required fields
         if (!name || !email || !message) {
             return NextResponse.json(
                 { error: "Name, email, and message are required" },
@@ -14,7 +13,6 @@ export async function POST(request: Request) {
             );
         }
 
-        // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return NextResponse.json(
@@ -23,8 +21,7 @@ export async function POST(request: Request) {
             );
         }
 
-        // Insert into Supabase
-        const supabase = createServerClient();
+        const supabase = createSupabaseAdminClient();
         const { error } = await supabase.from("contact_submissions").insert({
             first_name: name,
             email,
