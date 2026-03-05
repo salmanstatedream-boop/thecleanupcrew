@@ -107,14 +107,14 @@ export default function PricingCalculator3D() {
     }, [])
 
     return (
-        <div className="relative w-full h-[500px] bg-[#111111] rounded-2xl overflow-hidden border border-white/5">
+        <div className="relative w-full h-[500px] bg-white rounded-2xl overflow-hidden border border-black/10">
             <canvas
                 ref={canvasRef}
                 className="absolute inset-0 w-full h-full"
                 style={{ background: 'transparent' }}
             />
             <div className="absolute bottom-6 left-6 right-6 text-center">
-                <p className="text-white/30 text-xs uppercase tracking-widest">Interactive 3D Pricing Engine</p>
+                <p className="text-black/50 text-xs uppercase tracking-widest">Interactive 3D Pricing Engine</p>
             </div>
         </div>
     )

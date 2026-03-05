@@ -51,12 +51,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className={`${jakarta.variable} ${inter.variable} ${playfair.variable} font-sans bg-black text-white antialiased min-h-screen flex flex-col`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${jakarta.variable} ${inter.variable} ${playfair.variable} font-sans bg-background text-foreground antialiased min-h-screen flex flex-col`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
         </ThemeProvider>
       </body>
     </html>
   );
 }
+

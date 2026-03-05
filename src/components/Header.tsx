@@ -54,7 +54,7 @@ export default function Header() {
     return (
         <header
             className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
-                ? 'bg-black/90 backdrop-blur-xl border-b border-white/5 py-2.5 md:py-3'
+                ? 'bg-[#F8F6F0]/90 backdrop-blur-xl border-b border-black/10 py-2.5 md:py-3'
                 : 'bg-transparent py-3.5 md:py-5'
                 }`}
         >
@@ -79,7 +79,7 @@ export default function Header() {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className={`relative text-sm font-semibold uppercase tracking-widest transition-colors py-2 ${isActive ? 'text-white' : 'text-white/50 hover:text-white'}`}
+                                className={`relative text-sm font-semibold uppercase tracking-widest transition-colors py-2 ${isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
                             >
                                 {link.name}
                                 {isActive && (
@@ -96,7 +96,7 @@ export default function Header() {
 
                 {/* Desktop CTAs */}
                 <div className="hidden lg:flex items-center gap-5">
-                    <a href="tel:440985298" className="flex items-center gap-2 text-sm font-bold text-white/70 hover:text-white transition-colors">
+                    <a href="tel:440985298" className="flex items-center gap-2 text-sm font-bold text-foreground/80 hover:text-foreground transition-colors">
                         <div className="w-8 h-8 rounded-full bg-[#FFD700]/10 flex items-center justify-center">
                             <PhoneCall className="w-3.5 h-3.5 text-[#FFD700]" />
                         </div>
@@ -104,7 +104,7 @@ export default function Header() {
                     </a>
                     <Link
                         href="/login"
-                        className="text-sm font-bold uppercase tracking-wider text-white/70 hover:text-white transition-colors"
+                        className="text-sm font-bold uppercase tracking-wider text-foreground/80 hover:text-foreground transition-colors"
                     >
                         Sign In
                     </Link>
@@ -121,7 +121,7 @@ export default function Header() {
 
                 {/* Mobile Toggle */}
                 <button
-                    className="lg:hidden text-white p-2.5 relative z-50 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    className="lg:hidden text-foreground p-2.5 relative z-50 min-w-[44px] min-h-[44px] flex items-center justify-center"
                     onClick={toggleMenu}
                     aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 >
@@ -147,7 +147,7 @@ export default function Header() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 top-0 bg-black/95 backdrop-blur-2xl z-40 lg:hidden flex flex-col"
+                        className="fixed inset-0 top-0 bg-[#F8F6F0]/95 backdrop-blur-2xl z-40 lg:hidden flex flex-col"
                     >
                         <div className="flex-1 flex flex-col justify-center items-center px-8 gap-2">
                             {navLinks.map((link, i) => {
@@ -162,7 +162,7 @@ export default function Header() {
                                     >
                                         <Link
                                             href={link.href}
-                                            className={`block text-center text-2xl font-bold uppercase tracking-widest py-3.5 transition-colors ${isActive ? 'text-[#FFD700]' : 'text-white/60 active:text-white'}`}
+                                            className={`block text-center text-2xl font-bold uppercase tracking-widest py-3.5 transition-colors ${isActive ? 'text-[#FFD700]' : 'text-muted-foreground active:text-foreground'}`}
                                             onClick={closeMenu}
                                         >
                                             {link.name}
@@ -185,12 +185,12 @@ export default function Header() {
                             transition={{ delay: 0.45, duration: 0.4 }}
                             className="px-6 pb-10 space-y-3"
                         >
-                            <a href="tel:440985298" className="flex items-center justify-center gap-3 text-white bg-white/5 border border-white/10 py-4 rounded-2xl font-medium text-base">
+                            <a href="tel:440985298" className="flex items-center justify-center gap-3 text-foreground bg-white/80 border border-black/10 py-4 rounded-2xl font-medium text-base">
                                 <PhoneCall className="w-5 h-5 text-[#FFD700]" />
                                 +440-98-5298
                             </a>
                             <Link href="/login" onClick={closeMenu}>
-                                <div className="w-full text-center bg-white/5 border border-white/10 text-white font-bold py-4 rounded-2xl uppercase tracking-wider text-base">
+                                <div className="w-full text-center bg-white/80 border border-black/10 text-foreground font-bold py-4 rounded-2xl uppercase tracking-wider text-base">
                                     Sign In
                                 </div>
                             </Link>
@@ -206,3 +206,4 @@ export default function Header() {
         </header>
     )
 }
+

@@ -254,7 +254,7 @@ export default function HeroScene() {
     }, [])
 
     return (
-        <div ref={containerRef} className="absolute inset-0 w-full h-full bg-black">
+        <div ref={containerRef} className="absolute inset-0 w-full h-full bg-[#F8F6F0]">
             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
         </div>
     )
